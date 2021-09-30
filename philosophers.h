@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgoncalv <cgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/27 14:58:52 by cgoncalv          #+#    #+#             */
-/*   Updated: 2021/09/27 15:40:43 by cgoncalv         ###   ########.fr       */
+/*   Created: 2021/09/27 15:40:49 by cgoncalv          #+#    #+#             */
+/*   Updated: 2021/09/27 15:43:53 by cgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int argc, char *argv[])
+#ifndef PHILOSOPHERS
+
+typedef struct s_philosopher
 {
-    
-    if (argc < 5 || argc > 6)
-    {
-        usage();
-        return (1);
-    }
-}
+	int id;
+	time_to_die;
+	time_to_eat;
+	time_to_sleep;
+}	t_philosopher;
