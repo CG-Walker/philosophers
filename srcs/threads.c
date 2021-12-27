@@ -15,7 +15,7 @@
 static void	death_end(t_philo *philo)
 {
 	philo->db->can_write = True;
-	display_message(philo, "is dead !");
+	display_message(philo, "died");
 	pthread_mutex_lock(&philo->db->display_mutex);
 	philo->db->can_write = False;
 	philo->db->stop = True;
@@ -28,7 +28,7 @@ static void	eat_enough_end(t_philo *philo)
 	philo->db->can_write = False;
 	pthread_mutex_lock(&philo->db->display_mutex);
 	ms = now() - time_to_ms(philo->db->start_time);
-	printf("[%ld]\tEveryone\tate enough !", ms);
+	printf("[%ld]\tEveryone\tate enough", ms);
 	philo->db->stop = True;
 }
 

@@ -14,7 +14,7 @@ CC		=	gcc
 CFLAGS =	-Wall -Wextra -Werror
 SRC		=	srcs/main.c srcs/threads.c srcs/errors.c srcs/init.c srcs/philosophers.c srcs/display.c srcs/utils_libft.c srcs/utils_philo.c
 OBJ 	=	$(SRC:%.c=%.o)
-NAME 	=	philosophers
+NAME 	=	philo
 
 all : $(NAME)
 
@@ -34,3 +34,5 @@ re:			fclean all
 exec:		all
 			@echo "\033[32m[✓]\033[0m		[$(NAME) executed]\n"
 			@./$(NAME)
+
+.PHONY:		all clean fclean re exec

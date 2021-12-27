@@ -14,8 +14,6 @@
 
 static void	take_forks(t_philo *philo)
 {
-	if (philo->db->stop)
-		return ;
 	pthread_mutex_lock(philo->left);
 	display_message(philo, "has taken a fork on his left");
 	if (philo->left == philo->right)
@@ -29,8 +27,6 @@ static void	take_forks(t_philo *philo)
 
 static void	eat(t_philo *philo)
 {
-	if (philo->db->stop)
-		return ;
 	display_message(philo, "is eating");
 	ft_usleep(philo->db->time_to_eat, philo);
 	philo->nb_of_meal += 1;
@@ -41,16 +37,12 @@ static void	eat(t_philo *philo)
 
 static void	ft_sleep(t_philo *philo)
 {
-	if (philo->db->stop)
-		return ;
 	display_message(philo, "is sleeping");
 	ft_usleep(philo->db->time_to_sleep, philo);
 }
 
 static void	think(t_philo *philo)
 {
-	if (philo->db->stop)
-		return ;
 	display_message(philo, "is thinking");
 }
 

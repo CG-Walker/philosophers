@@ -19,12 +19,10 @@ void	display_message(t_philo *philo, const char *message)
 
 	if (philo->db->can_write == True)
 	{
-		philo->db->can_write = False;
 		pthread_mutex_lock(&philo->db->display_mutex);
 		gettimeofday(&t, NULL);
 		ms = time_to_ms(t) - time_to_ms(philo->db->start_time);
 		printf("[%ld]\tPhilo %d\t\t%s\n", ms, philo->id, message);
 		pthread_mutex_unlock(&philo->db->display_mutex);
-		philo->db->can_write = True;
 	}
 }
