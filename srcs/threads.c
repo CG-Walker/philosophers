@@ -19,17 +19,17 @@ static void	death_end(t_philo *philo)
 	pthread_mutex_lock(&philo->db->display_mutex);
 	philo->db->can_write = False;
 	philo->db->stop = True;
+	pthread_mutex_unlock(&philo->db->display_mutex);
 }
 
 static void	eat_enough_end(t_philo *philo)
 {
-	u_int64_t	ms;
-
-	philo->db->can_write = False;
+	philo->db->can_write = True;
+	display_message(philo, "was the last to ate enough");
 	pthread_mutex_lock(&philo->db->display_mutex);
-	ms = now() - time_to_ms(philo->db->start_time);
-	printf("[%ld]\tEveryone\tate enough", ms);
+	philo->db->can_write = False;
 	philo->db->stop = True;
+	pthread_mutex_unlock(&philo->db->display_mutex);
 }
 
 static void	*check_end(void *data)
@@ -47,8 +47,8 @@ static void	*check_end(void *data)
 			ate_enough = True;
 			philo->db->nb_who_ate_enough += 1;
 		}
-		if (!philo->db->stop && now() - time_to_ms(philo->last_meal_time)
-			>= philo->db->time_to_die)
+		if (!philo->db->stop && (now() - philo->last_meal_time)
+			>= (long)philo->db->time_to_die)
 			death_end(philo);
 		if (!philo->db->stop && philo->db->nb_who_ate_enough
 			== philo->db->nb_of_philosophers)
@@ -65,7 +65,7 @@ void	create_philosophers(t_db *db)
 	gettimeofday(&db->start_time, NULL);
 	while (i < db->nb_of_philosophers)
 	{
-		db->philos[i].last_meal_time = db->start_time;
+		db->philos[i].last_meal_time = time_to_ms(db->start_time);
 		pthread_create(&db->philos[i].thread_main,
 			NULL, &routine, &db->philos[i]);
 		pthread_create(&db->philos[i].thread_death,

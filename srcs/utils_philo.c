@@ -12,21 +12,25 @@
 
 #include "../includes/philosophers.h"
 
-int64_t	time_to_ms(struct timeval time)
+long int	time_to_ms(struct timeval time)
 {
-	int64_t	ms;
+	long int	ms;
 
 	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
 	return (ms);
 }
 
-int64_t	now(void)
+long int	now(void)
 {
-	int64_t			time;
+	long int		time;
 	struct timeval	now;
 
 	time = 0;
-	gettimeofday(&now, NULL);
+	if (gettimeofday(&now, NULL) == -1)
+	{
+		printf("gettimeday error.\n");
+		exit(-1);
+	}
 	time = time_to_ms(now);
 	return (time);
 }

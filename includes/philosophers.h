@@ -6,7 +6,7 @@
 /*   By: cgoncalv <cgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:40:49 by cgoncalv          #+#    #+#             */
-/*   Updated: 2021/12/23 19:57:44 by cgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/10 20:40:17 by cgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef enum e_bool
 typedef struct s_philo
 {
 	int				id;
-	struct timeval	last_meal_time;
+	long int		last_meal_time;
 	int				nb_of_meal;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
@@ -86,13 +86,13 @@ void		*routine(void *argv);
 size_t		ft_strlen(const char *s);
 int			ft_atoi(const char *str);
 void		ft_usleep(int64_t time_in_ms, t_philo *philo);
-int64_t		now(void);
+long int	now(void);
 
 /* 
 ** display.c
 */
 
 void		display_message(t_philo *philo, const char *message);
-int64_t		time_to_ms(struct timeval time);
+long int	time_to_ms(struct timeval time);
 
 #endif

@@ -30,7 +30,7 @@ static void	eat(t_philo *philo)
 	display_message(philo, "is eating");
 	ft_usleep(philo->db->time_to_eat, philo);
 	philo->nb_of_meal += 1;
-	gettimeofday(&philo->last_meal_time, NULL);
+	philo->last_meal_time = now();
 	pthread_mutex_unlock(philo->left);
 	pthread_mutex_unlock(philo->right);
 }
