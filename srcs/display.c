@@ -15,15 +15,13 @@
 void	display_message(t_philo *philo, const char *message, t_bool is_end)
 {
 	long int		ms;
-	struct timeval	t;
 
 	pthread_mutex_lock(&philo->db->display_mutex);
-	if (philo->db->can_write == True)
+	if ((philo->db->can_write == True && !philo->db->stop) || is_end == True)
 	{
 		if (is_end == True)
 			philo->db->can_write = False;
-		gettimeofday(&t, NULL);
-		ms = time_to_ms(t) - time_to_ms(philo->db->start_time);
+		ms = now() - philo->db->start_time;
 		printf("[%ld]\tPhilo %d\t\t%s\n", ms, philo->id, message);
 	}
 	pthread_mutex_unlock(&philo->db->display_mutex);

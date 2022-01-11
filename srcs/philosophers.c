@@ -27,6 +27,15 @@ static void	take_forks(t_philo *philo)
 
 static void	eat(t_philo *philo)
 {
+	/*
+	if (philo->nb_of_meal + 1 >= philo->db->min_meal
+		&& philo->db->nb_who_ate_enough + 1
+		>= philo->db->nb_of_philosophers)
+	{
+		philo->db->can_write = True;
+		display_message(philo, "is eating", True);
+	}
+	else */
 	display_message(philo, "is eating", False);
 	ft_usleep(philo->db->time_to_eat, philo);
 	philo->nb_of_meal += 1;

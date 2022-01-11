@@ -18,10 +18,13 @@ void	usage(void)
 	(Opt : [nb_min_eat])\n");
 }
 
-static void	join_and_free_philos(t_db *db)
+static void	stop(t_db *db)
 {
 	int		i;
 
+	i = 0;
+	while (i < db->nb_of_philosophers)
+		pthread_join(db->philos[i++].thread_death, NULL);
 	i = 0;
 	while (i < db->nb_of_philosophers)
 		pthread_join(db->philos[i++].thread_main, NULL);
@@ -30,6 +33,9 @@ static void	join_and_free_philos(t_db *db)
 	while (i < db->nb_of_philosophers)
 		pthread_mutex_destroy(&db->forks[i++]);
 	free(db->forks);
+	if (db->min_meal != -1
+		&& db->nb_who_ate_enough == db->nb_of_philosophers)
+		printf("Each philosophers ate %d time(s)\n", db->min_meal);
 }
 
 int	main(int argc, char *argv[])
@@ -45,5 +51,5 @@ int	main(int argc, char *argv[])
 	if (init(&database, argv) == False)
 		return (EXIT_FAILURE);
 	create_philosophers(&database);
-	join_and_free_philos(&database);
+	stop(&database);
 }

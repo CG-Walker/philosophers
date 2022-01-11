@@ -46,7 +46,7 @@ typedef struct s_db
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_meal;
-	struct timeval	start_time;
+	long int		start_time;
 	t_bool			stop;
 	t_bool			can_write;
 	pthread_mutex_t	display_mutex;
