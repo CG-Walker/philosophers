@@ -6,20 +6,22 @@
 /*   By: cgoncalv <cgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 23:25:15 by cgoncalv          #+#    #+#             */
-/*   Updated: 2021/12/14 23:25:15 by cgoncalv         ###   ########.fr       */
+/*   Updated: 2022/01/11 11:35:13 by cgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void	display_message(t_philo *philo, const char *message)
+void	display_message(t_philo *philo, const char *message, t_bool is_end)
 {
-	u_int64_t		ms;
+	long int		ms;
 	struct timeval	t;
 
 	pthread_mutex_lock(&philo->db->display_mutex);
 	if (philo->db->can_write == True)
 	{
+		if (is_end == True)
+			philo->db->can_write = False;
 		gettimeofday(&t, NULL);
 		ms = time_to_ms(t) - time_to_ms(philo->db->start_time);
 		printf("[%ld]\tPhilo %d\t\t%s\n", ms, philo->id, message);

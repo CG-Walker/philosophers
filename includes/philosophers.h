@@ -54,32 +54,32 @@ typedef struct s_db
 	t_philo			*philos;
 }	t_db;
 
-/* 
+/*
 ** philosophers.c
 */
 
 t_bool		init(t_db *database, char *argv[]);
 
-/* 
+/*
 **	errors.c
 */
 
 t_bool		display_error(char const *s);
 
-/* 
+/*
 ** threads.c
 */
 
 void		create_philosophers(t_db *db);
 void		*check_death(void *data);
 
-/* 
+/*
 ** philosophers.c
 */
 
 void		*routine(void *argv);
 
-/* 
+/*
 ** utils.c
 */
 
@@ -88,11 +88,11 @@ int			ft_atoi(const char *str);
 void		ft_usleep(int64_t time_in_ms, t_philo *philo);
 long int	now(void);
 
-/* 
+/*
 ** display.c
 */
 
-void		display_message(t_philo *philo, const char *message);
+void		display_message(t_philo *philo, const char *message, t_bool is_end);
 long int	time_to_ms(struct timeval time);
 
 #endif

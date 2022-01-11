@@ -28,9 +28,9 @@ clean:
 
 fclean:		clean
 			@rm -f $(NAME) a.aout
-			
+
 re:			fclean all
-		
+
 exec:		all
 			@echo "\033[32m[✓]\033[0m		[$(NAME) executed]\n"
 			@./$(NAME)

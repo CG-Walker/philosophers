@@ -15,7 +15,7 @@
 static void	death_end(t_philo *philo)
 {
 	philo->db->can_write = True;
-	display_message(philo, "died");
+	display_message(philo, "died", True);
 	pthread_mutex_lock(&philo->db->display_mutex);
 	philo->db->can_write = False;
 	philo->db->stop = True;
@@ -25,7 +25,7 @@ static void	death_end(t_philo *philo)
 static void	eat_enough_end(t_philo *philo)
 {
 	philo->db->can_write = True;
-	display_message(philo, "was the last to ate enough");
+	display_message(philo, "was the last to ate enough", True);
 	pthread_mutex_lock(&philo->db->display_mutex);
 	philo->db->can_write = False;
 	philo->db->stop = True;
